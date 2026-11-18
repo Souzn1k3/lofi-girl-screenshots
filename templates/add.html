@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Добавить скриншот - Скриншоты Lofi Girl
+{% endblock %}
+
+{% block content %}
+
+<h2>Новый скриншот</h2>
+
+{% set form_action = url_for('add_screenshot') %}
+{% set button_text = "Добавить" %}
+{% set form_title = title|default('') %}
+{% set form_description = description|default('') %}
+{% set form_mood = mood|default('') %}
+{% set form_image = selected_image|default('') %}
+
+{% include "_form.html" %}
+
+{% endblock %}

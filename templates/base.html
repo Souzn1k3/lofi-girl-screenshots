@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Скриншоты Lofi Girl{% endblock %}</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 16px;
+            background: #faf8f5;
+            color: #2b2b2b;
+        }
+        nav a {
+            margin-right: 16px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+        .thumb, .full {
+            display: block;
+            max-width: 100%;
+            border-radius: 6px;
+        }
+        .mood {
+            color: #666;
+            font-size: 14px;
+        }
+        .errors {
+            color: #b00020;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="{{ url_for('index') }}">Скриншоты Lofi Girl</a></h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Галерея</a>
+            <a href="{{ url_for('add_screenshot') }}">Добавить скриншот</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

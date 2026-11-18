@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ screenshot.title }} - Скриншоты Lofi Girl
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ screenshot.title }}</h2>
+
+{% if screenshot.image %}
+    <img class="full" src="{{ url_for('static', filename='images/' ~ screenshot.image) }}" alt="{{ screenshot.title }}">
+{% else %}
+    <p>Изображение не прикреплено.</p>
+{% endif %}
+
+<p>{{ screenshot.description }}</p>
+
+{% if screenshot.mood %}
+    <p class="mood">Настроение: {{ screenshot.mood }}</p>
+{% endif %}
+
+<p>
+    <a href="{{ url_for('edit_screenshot', screenshot_id=screenshot.id) }}">Редактировать</a>
+</p>
+
+<form method="POST" action="{{ url_for('delete_screenshot', screenshot_id=screenshot.id) }}">
+    <button type="submit">Удалить скриншот</button>
+</form>
+
+<p>
+    <a href="{{ url_for('index') }}">Назад к галерее</a>
+</p>
+
+{% endblock %}

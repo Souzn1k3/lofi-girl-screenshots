@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+Галерея - Скриншоты Lofi Girl
+{% endblock %}
+
+{% block content %}
+
+<h2>Галерея скриншотов</h2>
+
+<form method="GET" action="{{ url_for('index') }}">
+    <p>
+        <label for="q">Поиск по названию</label><br>
+        <input type="text" id="q" name="q" value="{{ query }}">
+    </p>
+
+    <p>
+        <label for="mood">Настроение</label><br>
+        <select id="mood" name="mood">
+            <option value="">Все</option>
+            {% for mood in moods %}
+                <option value="{{ mood }}" {% if mood == selected_mood %}selected{% endif %}>{{ mood }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <button type="submit">Найти</button>
+
+    {% if query or selected_mood %}
+        <a href="{{ url_for('index') }}">Сбросить</a>
+    {% endif %}
+</form>
+
+{% if query or selected_mood %}
+    <p>Найдено: {{ screenshots|length }} из {{ total_count }}</p>
+{% endif %}
+
+{% if total_count == 0 %}
+    <p>Пока нет ни одного скриншота.</p>
+{% elif screenshots %}
+    {% for screenshot in screenshots %}
+        <article class="card">
+            {% if screenshot.image %}
+                <a href="{{ url_for('detail', screenshot_id=screenshot.id) }}">
+                    <img class="thumb" src="{{ url_for('static', filename='images/' ~ screenshot.image) }}" alt="{{ screenshot.title }}">
+                </a>
+            {% else %}
+                <p class="mood">Изображение не прикреплено.</p>
+            {% endif %}
+
+            <h3>{{ screenshot.title }}</h3>
+
+            {% if screenshot.mood %}
+                <p class="mood">Настроение: {{ screenshot.mood }}</p>
+            {% endif %}
+
+            <p>{{ screenshot.description }}</p>
+
+            <a href="{{ url_for('detail', screenshot_id=screenshot.id) }}">Подробнее</a>
+        </article>
+    {% endfor %}
+{% else %}
+    <p>Ничего не найдено. Попробуйте изменить запрос или сбросить фильтры.</p>
+{% endif %}
+
+{% endblock %}
