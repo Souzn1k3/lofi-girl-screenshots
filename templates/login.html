@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+Вход - Скриншоты Lofi Girl
+{% endblock %}
+
+{% block content %}
+
+<h2>Вход</h2>
+
+{% if errors %}
+    <ul class="errors">
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="POST" action="{{ url_for('login') }}">
+
+    <p>
+        <label for="username">Имя пользователя</label><br>
+        <input type="text" id="username" name="username" value="{{ username|default('') }}">
+    </p>
+
+    <p>
+        <label for="password">Пароль</label><br>
+        <input type="password" id="password" name="password">
+    </p>
+
+    <button type="submit">Войти</button>
+
+</form>
+
+<p>Нет аккаунта? <a href="{{ url_for('register') }}">Зарегистрируйтесь</a>.</p>
+<p class="mood">Демо-аккаунт: demo / lofi1234</p>
+
+{% endblock %}

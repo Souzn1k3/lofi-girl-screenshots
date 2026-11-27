@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+Регистрация - Скриншоты Lofi Girl
+{% endblock %}
+
+{% block content %}
+
+<h2>Регистрация</h2>
+
+{% if errors %}
+    <ul class="errors">
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="POST" action="{{ url_for('register') }}">
+
+    <p>
+        <label for="username">Имя пользователя</label><br>
+        <input type="text" id="username" name="username" value="{{ username|default('') }}">
+    </p>
+
+    <p>
+        <label for="password">Пароль (минимум 6 символов)</label><br>
+        <input type="password" id="password" name="password">
+    </p>
+
+    <p>
+        <label for="password_confirm">Повторите пароль</label><br>
+        <input type="password" id="password_confirm" name="password_confirm">
+    </p>
+
+    <button type="submit">Зарегистрироваться</button>
+
+</form>
+
+<p>Уже есть аккаунт? <a href="{{ url_for('login') }}">Войдите</a>.</p>
+
+{% endblock %}

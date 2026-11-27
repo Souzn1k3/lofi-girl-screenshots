@@ -36,27 +36,31 @@
 {% endif %}
 
 {% if total_count == 0 %}
-    <p>Пока нет ни одного скриншота.</p>
+    <p>Пока нет ни одного скриншота. <a href="{{ url_for('add_screenshot') }}">Добавьте первый</a>.</p>
 {% elif screenshots %}
     {% for screenshot in screenshots %}
         <article class="card">
-            {% if screenshot.image %}
-                <a href="{{ url_for('detail', screenshot_id=screenshot.id) }}">
-                    <img class="thumb" src="{{ url_for('static', filename='images/' ~ screenshot.image) }}" alt="{{ screenshot.title }}">
+            {% if screenshot['image'] %}
+                <a href="{{ url_for('detail', screenshot_id=screenshot['id']) }}">
+                    <img class="thumb" src="{{ url_for('static', filename='images/' ~ screenshot['image']) }}" alt="{{ screenshot['title'] }}">
                 </a>
             {% else %}
                 <p class="mood">Изображение не прикреплено.</p>
             {% endif %}
 
-            <h3>{{ screenshot.title }}</h3>
+            <h3>{{ screenshot['title'] }}</h3>
 
-            {% if screenshot.mood %}
-                <p class="mood">Настроение: {{ screenshot.mood }}</p>
+            {% if screenshot['mood'] %}
+                <p class="mood">Настроение: {{ screenshot['mood'] }}</p>
             {% endif %}
 
-            <p>{{ screenshot.description }}</p>
+            {% if screenshot['stream_title'] %}
+                <p class="mood">Стрим: {{ screenshot['stream_title'] }}</p>
+            {% endif %}
 
-            <a href="{{ url_for('detail', screenshot_id=screenshot.id) }}">Подробнее</a>
+            <p>{{ screenshot['description'] }}</p>
+
+            <a href="{{ url_for('detail', screenshot_id=screenshot['id']) }}">Подробнее</a>
         </article>
     {% endfor %}
 {% else %}

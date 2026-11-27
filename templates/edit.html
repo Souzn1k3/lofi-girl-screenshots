@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 
 {% block title %}
-Редактировать - {{ screenshot.title }}
+Редактировать - {{ screenshot['title'] }}
 {% endblock %}
 
 {% block content %}
 
-<h2>Редактирование: {{ screenshot.title }}</h2>
+<h2>Редактирование: {{ screenshot['title'] }}</h2>
 
-{% set form_action = url_for('edit_screenshot', screenshot_id=screenshot.id) %}
+{% set form_action = url_for('edit_screenshot', screenshot_id=screenshot['id']) %}
 {% set button_text = "Сохранить изменения" %}
-{% set form_title = title|default(screenshot.title) %}
-{% set form_description = description|default(screenshot.description) %}
-{% set form_mood = mood|default(screenshot.mood) %}
-{% set form_image = selected_image|default(screenshot.image) %}
+{% set form_title = title|default(screenshot['title']) %}
+{% set form_description = description|default(screenshot['description']) %}
+{% set form_mood = mood|default(screenshot['mood']) %}
+{% set form_image = selected_image|default(screenshot['image']) %}
+{% set form_stream = selected_stream|default(screenshot['stream_id']) %}
 
 {% include "_form.html" %}
 
 <p>
-    <a href="{{ url_for('detail', screenshot_id=screenshot.id) }}">Отмена</a>
+    <a href="{{ url_for('detail', screenshot_id=screenshot['id']) }}">Отмена</a>
 </p>
 
 {% endblock %}

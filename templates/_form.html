@@ -33,6 +33,16 @@
         </select>
     </p>
 
+    <p>
+        <label for="stream">Стрим Lofi Girl</label><br>
+        <select id="stream" name="stream_id">
+            <option value="">- без стрима -</option>
+            {% for stream in streams %}
+                <option value="{{ stream['id'] }}" {% if stream['id'] == form_stream %}selected{% endif %}>{{ stream['title'] }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
     <button type="submit">{{ button_text }}</button>
 
 </form>
